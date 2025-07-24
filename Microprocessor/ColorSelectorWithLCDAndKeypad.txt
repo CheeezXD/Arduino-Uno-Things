@@ -1,0 +1,126 @@
+
+
+//Nov. 28, 2023
+//By Gallener
+
+#include <Keypad.h>
+#include <LiquidCrystal.h>
+
+const byte ROWS = 4;	//four rows
+const byte COLS = 4;	//four columns
+
+char keys[ROWS][COLS] = {
+  {'1', '2', '3', 'A'},
+  {'4', '5', '6', 'B'},
+  {'7', '8', '9', 'C'},
+  {'*', '0', '#', 'D'}
+};
+
+byte rowPins[ROWS] = {A0, A1, A2, A3};	//row pins in keypad  
+byte colPins[COLS] = {A4, A5, 1, 0};	//column pins in keypad  
+
+Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); 
+
+const int redPin = 8; 
+const int bluePin = 7; 
+const int greenPin = 6;   
+
+void setup() {
+  lcd.begin(16, 2);
+  lcd.print("Color Remote");
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
+}
+
+void setColor(int red, int green, int blue) 
+{
+  analogWrite(redPin, red);
+  analogWrite(greenPin, green);
+  analogWrite(bluePin, blue);
+}
+
+void displayColorName(int colorIndex) {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Color Remote");
+
+  lcd.setCursor(0, 1);
+
+//Hex Colors
+//https://www.rapidtables.com/convert/color/rgb-to-hex.html
+  
+  switch (colorIndex) {
+    case 0:
+      lcd.print("Color: Silver");
+      setColor(192, 192, 192);
+      break;
+    
+    case 1:
+      lcd.print("Color: Red");
+      setColor(255, 0, 0);
+      break;
+    
+    case 2:
+      lcd.print("Color: Green");
+      setColor(0, 255, 0);
+      break;
+    
+    case 3:
+      lcd.print("Color: Blue");
+      setColor(0, 0, 255);
+      break;
+    
+    case 4:
+      lcd.print("Color: Orange");
+      setColor(255, 100, 0);
+      break;
+    
+    case 5:
+      lcd.print("Color: Yellow");
+      setColor(255, 255, 0);
+      break;
+    
+    case 6:
+      lcd.print("Color: Cyan");
+      setColor(0, 255, 255);
+      break;
+    
+    case 7:
+      lcd.print("Color: Maroon");
+      setColor(128, 10, 0);
+      break;
+    
+    case 8:
+      lcd.print("Color: Pink");
+      setColor(255,0,255);
+      break;
+    
+    case 9:
+      lcd.print("Color: Purple");
+      setColor(150, 0, 150);
+      break;
+
+    default:
+      lcd.print("Color: Unknown");
+      clearPreviousColor();
+      break;
+  }
+}
+
+void clearPreviousColor() {
+  setColor(0, 0, 0);
+}
+
+void loop() {
+  char key = keypad.getKey();
+
+  	//allow 0 to 9 only
+  if (key >= '0' && key <= '9') {
+    int colorIndex = key - '0';
+    clearPreviousColor();
+    displayColorName(colorIndex);
+  }
+}

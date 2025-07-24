@@ -1,0 +1,78 @@
+//Alternating Lights
+
+int LED2 = 11;
+int LED3 = 10;
+int LED4 = 9;
+int LED5 = 8;
+int LED6 = 7;
+int LED7 = 6;
+int LED8 = 5;
+int LED9 = 4;
+int LED10 = 3;
+int LED11 = 2;
+
+void setup()
+{
+  
+  //DDRD = 11111111;      ---> Port A = Vin to IOREF   
+  						// ---> Port B = 8 to AREF
+  						// ---> Port C = A5 to A0
+  						// ---> Port D = 0 to 7
+
+  ///////////////////////////
+  
+  
+   pinMode(LED2, OUTPUT);
+   pinMode(LED3, OUTPUT);
+   pinMode(LED4, OUTPUT);
+   pinMode(LED5, OUTPUT);
+   pinMode(LED6, OUTPUT);
+   pinMode(LED7, OUTPUT);
+   pinMode(LED8, OUTPUT);
+   pinMode(LED9, OUTPUT);
+   pinMode(LED10, OUTPUT);
+   pinMode(LED11, OUTPUT);
+
+}
+
+void loop()
+{
+  
+  //DDRD = 11111011;
+  //delay(5000);
+  
+  //////////////////////
+
+  digitalWrite(LED2, LOW);     // turn off LED2
+  digitalWrite(LED4, LOW);     // turn off LED1 
+  digitalWrite(LED6, LOW);     // turn off LED3
+  digitalWrite(LED8, LOW);     // turn off LED2
+  digitalWrite(LED10, LOW);     // turn off LED3
+  delay(1000);  
+
+   
+  digitalWrite(LED2, HIGH);    // turn on LED2   
+  digitalWrite(LED4, HIGH);    // turn on LED1     
+  digitalWrite(LED6, HIGH);    // turn on LED3         
+  digitalWrite(LED8, HIGH);    // turn on LED2        
+  digitalWrite(LED10, HIGH);    // turn on LED2 
+ 
+  
+  ///////////////////////////////
+  
+  digitalWrite(LED3, LOW);     // turn off LED1 
+  digitalWrite(LED5, LOW);     // turn off LED3
+  digitalWrite(LED7, LOW);     // turn off LED2
+  digitalWrite(LED9, LOW);     // turn off LED3
+  digitalWrite(LED11, LOW);     // turn off LED3  
+  delay(1000);  
+
+  
+  digitalWrite(LED3, HIGH);    // turn on LED1     
+  digitalWrite(LED5, HIGH);    // turn on LED3
+  digitalWrite(LED7, HIGH);    // turn on LED3
+  digitalWrite(LED9, HIGH);    // turn on LED2        
+  digitalWrite(LED11, HIGH);    // turn on LED2
+  
+}
+

@@ -1,0 +1,52 @@
+
+const int r=11; //new way
+const int g=9; //new way
+const int b=10; //new way
+  
+
+void setup()
+{
+  pinMode(r, OUTPUT);
+  pinMode(g, OUTPUT);
+  pinMode(b, OUTPUT);
+}
+
+void rgbColor(int redVal, int greenVal, int blueVal)
+{
+  analogWrite(r,redVal);
+  analogWrite(b,blueVal);
+  analogWrite(g,greenVal);
+}
+
+void loop()
+{
+  
+  //red
+  rgbColor(255,0,0);
+  delay(1000);
+  
+  //green
+  rgbColor(0,255,0);
+  delay(1000);
+  
+  //blue
+  rgbColor(0,0,255);
+  delay(1000);
+  
+  //pink
+ 
+  //cyan
+  
+  
+  
+  rgbColor(255,0,255);
+  delay(1000);
+  
+  rgbColor(0,255,255);
+  delay(1000);
+  
+}
+
+
+
+

@@ -1,0 +1,134 @@
+//for 7segment display
+//0 to 9 output
+
+int a = 12;
+int b = 11;
+int c = 10;
+int d = 9;
+int e = 8;
+int f = 7;
+int g = 6;
+int potentiometer = A0; 
+
+void setup() {                
+  for(int pins = 6; pins <=12; pins++){
+  pinMode(pins, OUTPUT);
+ }  
+  pinMode(potentiometer, INPUT);
+}
+
+void loop() {
+  int pRes;
+  pRes = analogRead(potentiometer);
+  if (pRes >=0 && pRes <=101){
+    //0
+    digitalWrite(a, LOW);   
+    digitalWrite(b, LOW);   
+    digitalWrite(c, LOW);   
+    digitalWrite(d, LOW);   
+    digitalWrite(e, LOW);   
+    digitalWrite(f, LOW);   
+    digitalWrite(g, HIGH);
+    }
+
+   //low is on, high is off for common anode
+
+  else if (pRes >=102 && pRes <=203){
+     //1
+    digitalWrite(a, HIGH);   
+    digitalWrite(b, LOW);   
+    digitalWrite(c, LOW);   
+    digitalWrite(d, HIGH);   
+    digitalWrite(e, HIGH);   
+    digitalWrite(f, HIGH);   
+    digitalWrite(g, HIGH);
+    }
+  
+   else if (pRes >=204 && pRes <=305){
+     //2
+    digitalWrite(a, LOW);   
+    digitalWrite(b, LOW);   
+    digitalWrite(c, HIGH);   
+    digitalWrite(d, LOW);   
+    digitalWrite(e, LOW);   
+    digitalWrite(f, HIGH);   
+    digitalWrite(g, LOW); 
+    }
+  
+   else if (pRes >=306 && pRes <=407){
+    //3
+    digitalWrite(a, LOW);   
+    digitalWrite(b, LOW);   
+    digitalWrite(c, LOW);   
+    digitalWrite(d, LOW);   
+    digitalWrite(e, HIGH);   
+    digitalWrite(f, HIGH);   
+    digitalWrite(g, LOW);  
+    }
+
+  else if (pRes >=408 && pRes <=509){
+    //4
+    digitalWrite(a, HIGH);   
+    digitalWrite(b, LOW);   
+    digitalWrite(c, LOW);   
+    digitalWrite(d, HIGH);   
+    digitalWrite(e, HIGH);   
+    digitalWrite(f, LOW);   
+    digitalWrite(g, LOW);   
+  }
+
+  else if (pRes >=510 && pRes <=611){
+    //5
+    digitalWrite(a, LOW);   
+    digitalWrite(b, HIGH);   
+    digitalWrite(c, LOW);   
+    digitalWrite(d, LOW);   
+    digitalWrite(e, HIGH);   
+    digitalWrite(f, LOW);   
+    digitalWrite(g, LOW);  
+    }
+
+  else if (pRes >=612 && pRes <=713){
+    //6
+    digitalWrite(a, LOW);   
+    digitalWrite(b, HIGH);   
+    digitalWrite(c, LOW);   
+    digitalWrite(d, LOW);   
+    digitalWrite(e, LOW);   
+    digitalWrite(f, LOW);   
+    digitalWrite(g, LOW);  
+    }
+
+  else if (pRes >=714 && pRes <=815){
+    //7
+    digitalWrite(a, LOW);   
+    digitalWrite(b, LOW);   
+    digitalWrite(c, LOW);   
+    digitalWrite(d, HIGH);   
+    digitalWrite(e, HIGH);   
+    digitalWrite(f, HIGH);   
+    digitalWrite(g, HIGH); 
+    }
+
+  else if (pRes >=816 && pRes <=917){
+    //8
+    digitalWrite(a, LOW);   
+    digitalWrite(b, LOW);   
+    digitalWrite(c, LOW);   
+    digitalWrite(d, LOW);   
+    digitalWrite(e, LOW);   
+    digitalWrite(f, LOW);   
+    digitalWrite(g, LOW);
+    }
+
+  else if (pRes >=918 && pRes <=1023){
+    //9
+    digitalWrite(a, LOW);   
+    digitalWrite(b, LOW);   
+    digitalWrite(c, LOW);   
+    digitalWrite(d, HIGH);   
+    digitalWrite(e, HIGH);   
+    digitalWrite(f, LOW);   
+    digitalWrite(g, LOW);
+    }
+}
