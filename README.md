@@ -40,7 +40,7 @@ Each folder in this repository corresponds to a different task or project from t
 
 ## 📸 Previews
 
-Inside the `images/` folder, you'll find screenshots of the actual Tinkercad simulations for each task.
+Inside the `Screenshots_/` folder, you'll find screenshots of the actual Tinkercad simulations for each task.
 
 ---
 
