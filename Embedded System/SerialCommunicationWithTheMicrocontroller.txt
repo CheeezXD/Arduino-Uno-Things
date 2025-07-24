@@ -1,0 +1,246 @@
+//#1
+//It needs to type the command in the Serial Monitor to see the output.
+
+
+int redLed = 6;
+int yellowLed = 5;
+int greenLed = 3;
+
+String message = "";
+
+void setup()
+{
+  pinMode(redLed, OUTPUT);
+  pinMode(yellowLed, OUTPUT);
+  pinMode(greenLed, OUTPUT);
+  Serial.begin(9600);
+  while (!Serial) {
+    ; //wait for serial port to connect. Needed for native USB port only
+  }
+}
+
+void loop()
+{
+  while(Serial.available()>0) {
+    message = Serial.readString();
+    message.trim();
+}
+  if(message.length()>0) {
+    if(message.equalsIgnoreCase("red")) {
+      Serial.println("Turn on RED");
+      digitalWrite(redLed, HIGH);
+      digitalWrite(yellowLed, LOW);
+      digitalWrite(greenLed, LOW);
+    }
+    else if(message.equalsIgnoreCase("yellow")) {
+      Serial.println("Turn on Yellow");
+      digitalWrite(redLed, LOW);
+      digitalWrite(yellowLed, HIGH);
+      digitalWrite(greenLed, LOW);
+    }
+    else if(message.equalsIgnoreCase("green")) {
+      Serial.println("Turn on Green");
+      digitalWrite(redLed, LOW);
+      digitalWrite(yellowLed, LOW);
+      digitalWrite(greenLed, HIGH);
+      
+    }
+    else {
+      Serial.println("No such command");
+    }
+    message=""; //reset message to be able to receive other messages
+  }
+}
+
+// ==============================================================================================================================================================
+
+//#2
+//This is a different code. Make sure to copy and paste separately.
+
+
+int redLed = 6;
+int yellowLed = 5;
+int greenLed = 3;
+
+char charIn;
+String message = "";
+
+void setup()
+{
+  pinMode(redLed, OUTPUT);
+  pinMode(yellowLed, OUTPUT);
+  pinMode(greenLed, OUTPUT);
+  Serial.begin(9600);
+  while (!Serial) {
+    ; //wait for serial port to connect. Needed for native USB port only
+  }
+}
+
+void loop()
+{
+  while(Serial.available()>0) {
+    charIn = Serial.read();
+    message += charIn;
+}
+  if(message.length()>0) {
+    message.trim(); //trims out \n from the last character
+    if(message.equalsIgnoreCase("r")) {
+      Serial.println("Turn on RED");
+      digitalWrite(redLed, HIGH);
+      digitalWrite(yellowLed, LOW);
+      digitalWrite(greenLed, LOW);
+    }
+    else if(message.equalsIgnoreCase("y")) {
+      Serial.println("Turn on Yellow");
+      digitalWrite(redLed, LOW);
+      digitalWrite(yellowLed, HIGH);
+      digitalWrite(greenLed, LOW);
+    }
+    else if(message.equalsIgnoreCase("g")) {
+      Serial.println("Turn on Green");
+      digitalWrite(redLed, LOW);
+      digitalWrite(yellowLed, LOW);
+      digitalWrite(greenLed, HIGH);
+      
+    }
+    else {
+      Serial.println("No such command");
+    }
+    message=""; //reset message to be able to receive other messages
+  }
+}
+
+// ==============================================================================================================================================================
+
+//#3
+//This is a different code. Make sure to copy and paste separately.
+//It has Blinking Lights and Fading Lights options.
+
+
+int redLed = 6;
+int yellowLed = 5;
+int greenLed = 3;  
+
+void setup() {
+  pinMode(redLed, OUTPUT);
+  pinMode(yellowLed, OUTPUT);
+  pinMode(greenLed, OUTPUT);
+}
+
+void loop() {
+  int patternChoice = getUserChoice(); // Getting the user's choice
+
+  if (patternChoice == 1) {
+    blinkingLights();
+  } else if (patternChoice == 2) {
+    waveLights();
+  }
+}
+
+int getUserChoice() {
+  int choice = 0;
+  Serial.begin(9600);
+  Serial.println("Choose a pattern:");
+  Serial.println("1: Blinking Lights");
+  Serial.println("2: Wave Lights");
+  while (choice != 1 && choice != 2) {
+    if (Serial.available() > 0) {
+      choice = Serial.parseInt();
+    }
+  }
+  return choice;
+}
+
+void blinkingLights() {
+  digitalWrite(redLed, HIGH);
+  digitalWrite(yellowLed, LOW);
+  digitalWrite(greenLed, HIGH);
+  delay(1000);
+  digitalWrite(redLed, LOW);
+  digitalWrite(yellowLed, HIGH);
+  digitalWrite(greenLed, LOW);
+  delay(1000);
+}
+
+void waveLights() {
+  for (int i = 0; i < 5; i++) {
+    digitalWrite(redLed, HIGH);
+  	digitalWrite(yellowLed, LOW);
+    digitalWrite(greenLed, LOW);
+    delay(500);
+    digitalWrite(redLed, LOW);
+  	digitalWrite(yellowLed, HIGH);
+    digitalWrite(greenLed, LOW);
+    delay(500);
+    digitalWrite(redLed, LOW);
+  	digitalWrite(yellowLed, LOW);
+    digitalWrite(greenLed, HIGH);
+    delay(500);
+    digitalWrite(redLed, LOW);
+  	digitalWrite(yellowLed, HIGH);
+    digitalWrite(greenLed, LOW);
+    delay(500);
+    digitalWrite(redLed, HIGH);
+  	digitalWrite(yellowLed, LOW);
+    digitalWrite(greenLed, LOW);
+    delay(500);
+    
+  }
+}      
+      
+// ==============================================================================================================================================================      
+
+//#4
+//This is a different code. Make sure to copy and paste separately.
+//It has a username and password to enter.
+//It has access granted and denied features.
+
+
+int redLed = 6;
+int yellowLed = 5;
+int greenLed = 3;
+
+String username = "sample";
+String password = "only";
+
+String enterUsername = "";
+String enterPassword = "";
+
+void setup() {
+  pinMode(redLed, OUTPUT);
+  pinMode(greenLed, OUTPUT);
+  Serial.begin(9600);
+  while (!Serial) {
+    ; // Wait for the serial port to connect (needed for native USB port only)
+  }
+}
+
+void loop() {
+  Serial.println("Enter username:");
+  while (Serial.available() == 0) {
+    // Wait for the user to input the username
+  }
+  enterUsername = Serial.readString();
+  enterUsername.trim();
+
+  Serial.println("Enter password:");
+  while (Serial.available() == 0) {
+    // Wait for the user to input the password
+  }
+  enterPassword = Serial.readString();
+  enterPassword.trim();
+
+  if (enterUsername.equals(username) && enterPassword.equals(password)) 
+  {
+    Serial.println("Access granted! You may come in.");
+    digitalWrite(greenLed, HIGH);
+    digitalWrite(redLed, LOW); 
+  } 
+  
+  else 
+  {
+    Serial.println("Access denied! Please try again.");
+    digitalWrite(redLed, HIGH);
+    digitalWrite(greenLed, LOW);
+  }
+}

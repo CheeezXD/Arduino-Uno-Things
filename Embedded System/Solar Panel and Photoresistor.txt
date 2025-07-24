@@ -1,0 +1,118 @@
+#include<LiquidCrystal.h>
+#include <Servo.h>
+Servo motor1;
+LiquidCrystal lcd(13, 12, 11, 10, 9, 8);
+int sen0 = 0; int sen1 = 0; int sen2 = 0;
+int val=0; int nVal=0; int error= 0;
+
+
+void setup()
+{
+ lcd.begin(16, 2);
+ motor1.attach(7, 500, 2500);
+ DDRC=B111000;
+ 
+ motor1.write(90);
+ lcd.setCursor(0,0);
+ lcd.print("System");
+ lcd.setCursor(0,1);
+ lcd.print("Initializing");
+ PORTD = B01000000;
+ delay(250); 
+ lcd.setCursor(0,1);
+ lcd.print("Initializing.");
+ PORTD = B01110000;
+ delay(250); 
+ lcd.setCursor(0,1);
+ lcd.print("Initializing..");
+ PORTD = B01111100;
+ delay(250); 
+ lcd.clear();
+ lcd.print("No sun detected."); 	
+}
+
+void loop()
+{
+
+  sen0 = map(analogRead(A0), 0, 140, 0, 100);
+  sen1 = map(analogRead(A1), 0, 140, 0, 100);
+  sen2 = map(analogRead(A2), 0, 140, 0, 100);
+  
+  nVal=sen0+sen1+sen2;
+  
+  if (val!=nVal || error>=1){
+  	lcd.clear();
+    lcd.setCursor(0,0);   
+
+    if (sen0 >=50 && sen1 <=50 && sen2<=30)
+      {     
+        lcd.print("Sunrise"); 
+      	PORTD = B01000000;
+		motor1.write(120);
+      	error = 0;
+
+      }
+
+    else if (sen0 >=50 && sen1 >=50 && sen2 <= 50)
+      {
+        lcd.print("Morning"); 
+      	PORTD = B00100000;
+		motor1.write(100);
+      	error = 0;
+
+     }
+
+    else if (sen0 <=50 && sen1 >=50 && sen2 <= 50)
+      {
+        lcd.print("Noon");
+      	PORTD = B00010000;
+		motor1.write(90);
+      	error = 0;
+    }
+    else if (sen0 <=50 && sen1 >=50 && sen2 >=50)
+      {
+        lcd.print("Afternoon"); 
+      	PORTD = B00001000;
+		motor1.write(80);
+      	error = 0;
+      }
+    else if (sen0 <=50 && sen1 <=50 && sen2 >=50)
+      {
+        lcd.print("Sunset"); 
+      	PORTD = B00000100;
+		motor1.write(60);
+      	error = 0;
+    	}
+    else if (sen2==0 && sen1 ==0 && sen2==0)
+      {
+        lcd.print("No sun detected."); 
+      	error = 0;
+      }  
+
+    else
+      {
+        
+      if ( error < 3)
+        {	PORTD = B00000000;
+            lcd.clear();
+	     	lcd.print("Calculating."); 
+     	  	delay (500);
+        	error=error+1;
+        }
+      else{
+          PORTD = B01111100;
+          delay(200);
+		  PORTD = B00000000;          
+          lcd.clear();
+          lcd.setCursor(0,0);          
+          lcd.print("Maintenance");
+          lcd.setCursor (0,1);
+          lcd.print("Required.");
+          delay(500);
+        }
+     }
+  }
+  val=nVal; 
+
+
+}

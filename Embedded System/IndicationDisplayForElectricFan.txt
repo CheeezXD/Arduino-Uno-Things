@@ -1,0 +1,224 @@
+//7segment, pb, LED
+//pb1 = low ; pb2 = med ; pb3 = high
+//its like a button in an electric fan
+
+
+int ledA = 3;
+int ledB = 2;
+int ledC = 8;
+int ledD = 7;
+int ledE = 6;
+int ledF = 4;
+int ledG = 5;
+
+int yled = 10;
+int rled = 11;
+int gled = 12;
+
+int pb1;
+int pb2;
+int pb3;
+
+int spd = 500;
+
+void setup()
+{
+  
+  pinMode(ledA, OUTPUT);
+  pinMode(ledB, OUTPUT);
+  pinMode(ledC, OUTPUT);
+  pinMode(ledD, OUTPUT);
+  pinMode(ledE, OUTPUT);
+  pinMode(ledF, OUTPUT);
+  pinMode(ledG, OUTPUT);
+
+  pinMode(yled, OUTPUT);
+  pinMode(rled, OUTPUT);
+  pinMode(gled, OUTPUT);
+  
+  
+  pinMode(pb1, INPUT);
+  pinMode(pb2, INPUT);
+  pinMode(pb3, INPUT); 
+  
+}
+
+
+
+void loop()
+{
+  
+  	pb1=digitalRead(A0);
+	pb2=digitalRead(A1);
+	pb3=digitalRead(A2);
+  
+  
+  if (pb1 == 0)
+  {
+ 
+    	//YELLOW LED
+  digitalWrite(yled, HIGH);
+  digitalWrite(rled, LOW);
+  digitalWrite(gled, LOW);
+   
+    //L
+  digitalWrite(ledA, LOW);
+  digitalWrite(ledB, LOW);
+  digitalWrite(ledC, LOW);
+  digitalWrite(ledD, HIGH);
+  digitalWrite(ledE, HIGH);
+  digitalWrite(ledF, HIGH);
+  digitalWrite(ledG, LOW);
+  delay(spd);
+    
+  ////// O
+  digitalWrite(ledA, HIGH);
+  digitalWrite(ledB, HIGH);
+  digitalWrite(ledC, HIGH);
+  digitalWrite(ledD, HIGH);
+  digitalWrite(ledE, HIGH);
+  digitalWrite(ledF, HIGH);
+  digitalWrite(ledG, LOW);
+  delay(spd);
+    
+  ////// W
+  digitalWrite(ledA, LOW);
+  digitalWrite(ledB, HIGH);
+  digitalWrite(ledC, LOW);
+  digitalWrite(ledD, HIGH);
+  digitalWrite(ledE, LOW);
+  digitalWrite(ledF, HIGH);
+  digitalWrite(ledG, HIGH);
+  delay(spd);
+    
+    //Off
+  digitalWrite(ledA, LOW);
+  digitalWrite(ledB, LOW);
+  digitalWrite(ledC, LOW);
+  digitalWrite(ledD, LOW);
+  digitalWrite(ledE, LOW);
+  digitalWrite(ledF, LOW);
+  digitalWrite(ledG, LOW);
+  delay(spd);
+ 
+  digitalWrite(yled, LOW);
+    
+  }
+  
+  
+  if (pb2 == 0)
+  {
+    
+        	//RED LED
+  digitalWrite(yled, LOW);
+  digitalWrite(rled, HIGH);
+  digitalWrite(gled, LOW);
+    
+    //M
+  digitalWrite(ledA, HIGH);
+  digitalWrite(ledB, LOW);
+  digitalWrite(ledC, HIGH);
+  digitalWrite(ledD, LOW);
+  digitalWrite(ledE, HIGH);
+  digitalWrite(ledF, LOW);
+  digitalWrite(ledG, HIGH);
+  delay(spd);
+    
+      /////////// E
+  digitalWrite(ledA, HIGH);
+  digitalWrite(ledB, LOW);
+  digitalWrite(ledC, LOW);
+  digitalWrite(ledD, HIGH);
+  digitalWrite(ledE, HIGH);
+  digitalWrite(ledF, HIGH);
+  digitalWrite(ledG, HIGH);
+  delay(spd);
+    
+      /////////// d
+  digitalWrite(ledA, LOW);
+  digitalWrite(ledB, HIGH);
+  digitalWrite(ledC, HIGH);
+  digitalWrite(ledD, HIGH);
+  digitalWrite(ledE, HIGH);
+  digitalWrite(ledF, LOW);
+  digitalWrite(ledG, HIGH);
+  delay(spd);
+   
+    //Off
+  digitalWrite(ledA, LOW);
+  digitalWrite(ledB, LOW);
+  digitalWrite(ledC, LOW);
+  digitalWrite(ledD, LOW);
+  digitalWrite(ledE, LOW);
+  digitalWrite(ledF, LOW);
+  digitalWrite(ledG, LOW);
+  delay(spd);
+
+  digitalWrite(rled, LOW);
+    
+  }
+  
+  if (pb3 == 0)
+  {
+    
+        	//GREEN LED
+  digitalWrite(yled, LOW);
+  digitalWrite(rled, LOW);
+  digitalWrite(gled, HIGH);
+    
+    //H
+  digitalWrite(ledA, LOW);
+  digitalWrite(ledB, HIGH);
+  digitalWrite(ledC, HIGH);
+  digitalWrite(ledD, LOW);
+  digitalWrite(ledE, HIGH);
+  digitalWrite(ledF, HIGH);
+  digitalWrite(ledG, HIGH);
+  delay(spd);
+    
+      /////////// I
+  digitalWrite(ledA, LOW);
+  digitalWrite(ledB, HIGH);
+  digitalWrite(ledC, HIGH);
+  digitalWrite(ledD, LOW);
+  digitalWrite(ledE, LOW);
+  digitalWrite(ledF, LOW);
+  digitalWrite(ledG, LOW);
+  delay(spd);
+    
+      /////////// G
+  digitalWrite(ledA, HIGH);
+  digitalWrite(ledB, LOW);
+  digitalWrite(ledC, HIGH);
+  digitalWrite(ledD, HIGH);
+  digitalWrite(ledE, HIGH);
+  digitalWrite(ledF, HIGH);
+  digitalWrite(ledG, HIGH);
+  delay(spd);
+    
+        //H
+  digitalWrite(ledA, LOW);
+  digitalWrite(ledB, HIGH);
+  digitalWrite(ledC, HIGH);
+  digitalWrite(ledD, LOW);
+  digitalWrite(ledE, HIGH);
+  digitalWrite(ledF, HIGH);
+  digitalWrite(ledG, HIGH);
+  delay(spd);
+  
+     //Off
+  digitalWrite(ledA, LOW);
+  digitalWrite(ledB, LOW);
+  digitalWrite(ledC, LOW);
+  digitalWrite(ledD, LOW);
+  digitalWrite(ledE, LOW);
+  digitalWrite(ledF, LOW);
+  digitalWrite(ledG, LOW);
+  delay(spd);
+ 
+  digitalWrite(gled, LOW);
+   
+  }
+  
+  
+}
